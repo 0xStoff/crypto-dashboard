@@ -1,0 +1,27 @@
+:root {
+    --primary-color: #ffafcc;
+    --secondary-color: #cdb4db;
+    --text-color: #a2d2ff;
+    --background-color: #1E1E1E;
+    --card-color: #262828;
+    --shadow-color: rgba(0, 0, 0, 0.07);
+    --accent-color-1: #ffd6a5;
+    --accent-color-2: #9ddfd3;
+    --hover-color: #3a3a3a;
+    --badge-color: rgba(255, 255, 255, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: 'SF Pro Rounded', sans-serif;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}

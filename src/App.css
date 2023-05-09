@@ -1,0 +1,399 @@
+
+.address-item {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-color);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 10px 5px var(--shadow-color);
+    margin-bottom: 10px;
+    /*cursor: pointer;*/
+    transition: all 0.3s ease;
+}
+
+/*.address-item:hover {*/
+/*    transform: scale(1.01);*/
+/*    !*box-shadow: 12px 6px var(--shadow-color);*!*/
+/*}*/
+
+.address-text {
+    color: var(--primary-color);
+    background-color: var(--card-color);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    box-sizing: border-box;
+    white-space: nowrap;}
+
+.address-tag {
+    color: var(--accent-color-1);
+    cursor: pointer;
+
+}
+
+.address-tag-input {
+    background-color: var(--badge-color);
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: var(--accent-color-1);
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    /*cursor: pointer;*/
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.action-menu {
+    background-color: var(--background-color);
+    position: absolute;
+    right: 0;
+    top: 50px;
+
+    z-index: 1000;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 10px 5px var(--shadow-color);
+    align-self: flex-end;
+}
+
+.action-menu-button {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    padding: 8px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: left;
+
+}
+
+.action-menu-button:hover {
+    background-color: var(--hover-color);
+}
+
+.badge {
+    background-color: var(--badge-color);
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.card-badge {
+    position: absolute;
+    margin: -5px;
+    color: var(--accent-color-1);
+    background-color: var(--card-color);
+
+}
+
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--card-color);
+    height: 150px;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 350px;
+    margin-bottom: 10px;
+    box-shadow: 10px 5px var(--shadow-color);
+}
+
+.card-outline {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid var(--primary-color);
+    width: 260px;
+    height: 150px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+}
+
+
+.container {
+    width: 100%;
+    /*max-width: 1400px;*/
+}
+
+.container-list {
+    /*display: none;*/
+    display: flex;
+    justify-content: space-evenly;
+    /*position: absolute;*/
+    opacity: 0;
+    height: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.container-list.visible {
+    /*position: unset;*/
+    height: fit-content;
+    opacity: 1;
+    visibility: visible;
+}
+
+.context-button {
+
+    padding: 8px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+
+    background-color: var(--badge-color);
+    width: 30px;
+    height: 30px;
+    color: var(--primary-color);
+}
+
+
+.eth-address-tag {
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    outline: none;
+    color: var(--primary-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 1em;
+    font-family: 'SF Pro Rounded', sans-serif;
+    transition: 0.2s;
+    margin-bottom: 10px;
+
+}
+
+.eth-address-tag:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 2px 1px var(--primary-color);
+}
+
+.eth-address-input {
+    margin-bottom: 10px;
+    width: 550px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    outline: none;
+    color: var(--primary-color);
+    margin-right: 20px;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 1em;
+    font-family: 'SF Pro Rounded', sans-serif;
+    transition: 0.2s;
+}
+
+.eth-address-input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 2px 1px var(--primary-color);
+}
+
+.form-container {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    padding: 35px 20px !important;
+    margin-bottom: 30px;
+    position: absolute;
+    z-index: 99;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.form-container.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    margin-right: 20px;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    line-height: 1.5;
+}
+
+h2 {
+    color: var(--primary-color);
+    line-height: 1.5;
+    font-size: 1.5em;
+}
+
+.list {
+    background-color: var(--card-color);
+    min-width: 450px;
+    border-radius: 10px;
+    padding: 20px;
+    height: fit-content;
+    box-shadow: 10px 5px var(--shadow-color);
+
+}
+
+
+.toggle-list-button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 0; /* Remove padding */
+    font-size: 1.5em; /* Adjust font size */
+    border: none;
+    border-radius: 50%; /* Change the border-radius to 50% to make the button round */
+    width: 40px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
+    line-height: 50px; /* Set line-height equal to the height of the button for vertical alignment */
+    text-align: center; /* Center the text horizontally */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+.toggle-list-button:hover {
+    background-color: var(--accent-color-1);
+    color: var(--background-color);
+}
+
+
+.toggle-form-button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 0; /* Remove padding */
+    font-size: 1.5em; /* Adjust font size */
+    border: none;
+    border-radius: 50%; /* Change the border-radius to 50% to make the button round */
+    width: 50px; /* Set a fixed width */
+    height: 50px; /* Set a fixed height */
+    line-height: 50px; /* Set line-height equal to the height of the button for vertical alignment */
+    text-align: center; /* Center the text horizontally */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+.toggle-form-button:hover {
+    background-color: var(--accent-color-1);
+    color: var(--background-color);
+}
+
+.unify-button {
+    font-size: 1.5em;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+
+    background-color: var(--badge-color);
+    width: 40px;
+    height: 40px;
+    color: var(--primary-color);
+}
+
+.unify-button:hover {
+    background-color: var(--hover-color);
+}
+
+
+.network {
+    position: absolute;
+    margin: -7px;
+    width: 30px;
+    height: 30px;
+}
+
+
+p {
+    color: var(--secondary-color);
+}
+
+.price {
+    justify-self: flex-end;
+    font-size: 1.5em;
+    color: var(--primary-color);
+}
+
+
+.submit-button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 70px;
+
+}
+
+.submit-button:hover {
+    background-color: var(--accent-color-1);
+    color: var(--background-color);
+}
+
+
+.token {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.token-list {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+
+.token-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: var(--card-color);
+    box-shadow: 10px 5px var(--shadow-color);
+    margin: 20px 0 20px 0;
+}
+
+
+.worth {
+    font-size: 2.5em;
+    color: var(--primary-color);
+}
+
+
+@media only screen and (max-width: 992px) {
+    .container-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .list {
+        margin: 10px;
+
+    }
+}

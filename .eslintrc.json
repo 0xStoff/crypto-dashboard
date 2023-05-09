@@ -1,0 +1,200 @@
+{
+  "root": true, // Indicates that this is the root configuration file
+  "env": { // Specifies global environments
+    "browser": true, // Enables browser globals
+    "es2021": true, // Enables ES2021 globals
+    "node": true // Enables Node.js globals
+  },
+  "ignorePatterns": ["node_modules/", "src/archive"],
+  "extends": [ // Specifies the base configurations to extend
+    "eslint:recommended", // Core ESLint rules
+    "plugin:react/recommended", // Recommended React rules
+    "plugin:@typescript-eslint/recommended", // Recommended TypeScript rules
+    "plugin:import/errors", // Import-related error rules
+    "plugin:import/warnings", // Import-related warning rules
+    "plugin:import/typescript", // Import-related TypeScript rules
+    "plugin:react-hooks/recommended", // Recommended React hooks rules
+    "plugin:jsx-a11y/recommended", // Recommended accessibility rules
+    "prettier", // Prettier integration
+    "next/core-web-vitals" // Next.js core web vitals rules
+  ],
+  "parser": "@typescript-eslint/parser", // Specifies the parser for TypeScript
+  "parserOptions": { // Specifies parser options
+    "ecmaFeatures": {
+      "jsx": true // Enables JSX parsing
+    },
+    "ecmaVersion": 12, // Specifies ECMAScript version
+    "sourceType": "module" // Specifies script type
+  },
+  "plugins": [ // Specifies the plugins used
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "import",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    // React rules
+    "react/react-in-jsx-scope": "off", // Disables the rule requiring React to be in scope
+    "react/prop-types": "off", // Disables prop-types validation (handled by TypeScript)
+
+    // TypeScript rules
+    "@typescript-eslint/explicit-module-boundary-types": "off", // Disables the rule requiring explicit return types for module exports
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_" // Allows unused variables with a name starting with "_"
+      }
+    ],
+
+    // Import rules
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always", // Requires newlines between import groups
+        "alphabetize": {
+          "order": "asc", // Requires imports to be alphabetized
+          "caseInsensitive": true // Makes alphabetizing case-insensitive
+        }
+      }
+    ],
+
+    // Code style and formatting rules
+    "indent": [
+      "error",
+      2, // Requires 2-space indentation
+      {
+        "SwitchCase": 1 // Requires 1 level of indentation for case statements inside switch blocks
+      }
+    ],
+    "brace-style": [
+      "error",
+      "1tbs" // Requires "one true brace style" for braces
+    ],
+    "eol-last": [
+      "error",
+      "always" // Requires a newline at the end of the file
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1, // Allows a maximum of 1 consecutive empty line
+        "maxEOF": 0 // Disallows empty lines at the end of the file
+      }
+    ],
+    "semi": [
+      "error",
+      "always" // Requires semicolons at the end of statements
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true // Requires consistent newline usage inside object literals
+      }
+    ],
+    "quotes": [
+      "error",
+      "single", // Requires single quotes for strings
+      {
+        "avoidEscape": true // Allows using double quotes when escaping single quotes is needed
+      }
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "never" // Disallows spaces inside array brackets
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always" // Requires spaces inside object curly braces
+    ],
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "semi", // Requires semicolons as delimiters for multiline type members
+          "requireLast": true // Requires a semicolon for the last member in a multiline type
+        },
+        "singleline": {
+          "delimiter": "semi", // Requires semicolons as delimiters for single-line type members
+          "requireLast": false // Disallows a semicolon for the last member in a single-line type
+        }
+      }
+    ],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "maximum": 1 // Limits the number of props per line to 1 in JSX
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix" // Requires Unix-style line endings (LF)
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true, // Requires space before keywords
+        "after": true // Requires space after keywords
+      }
+    ],
+    "func-call-spacing": [
+      "error",
+      "never" // Disallows spaces between a function and its arguments
+    ],
+    "space-in-parens": [
+      "error",
+      "never" // Disallows spaces inside parentheses
+    ],
+    // Best practices rules
+    "no-console": "warn", // Warns when using console.log or similar methods
+    "no-debugger": "error", // Errors when using debugger statements
+    "no-eval": "error", // Errors when using eval()
+    "no-empty": "error", // Errors when encountering empty blocks
+    "no-dupe-keys": "error", // Errors when encountering duplicate object keys
+    "no-dupe-args": "error", // Errors when encountering duplicate function arguments
+    "no-duplicate-case": "error", // Errors when encountering duplicate case statements
+    "no-else-return": "error", // Errors when encountering return statements inside else blocks
+    "no-undef": "error", // Errors when encountering undefined variables
+    "no-unreachable": "error", // Errors when encountering unreachable code
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_" // Warns for unused variables with a name not starting with "_"
+      }
+    ],
+    "no-use-before-define": "error", // Errors when encountering variables used before their definition
+    "no-var": "error", // Errors when encountering var declarations
+    "prefer-const": "error", // Errors when let can be replaced by const
+    "prefer-arrow-callback": "error", // Errors when using a function expression instead of an arrow function
+    "prefer-template": "error", // Errors when using string concatenation instead of template literals
+    "eqeqeq": [
+      "error",
+      "always" // Errors when using loose equality operators (==, !=)
+    ],
+    "curly": "error", // Errors when using single-line blocks without curly braces
+    "dot-notation": "error", // Errors when not using dot notation to access object properties
+    "@typescript-eslint/no-explicit-any": "warn", // Warns when using the 'any' type explicitly
+    "@typescript-eslint/no-inferrable-types": "warn", // Warns when inferrable types are explicitly specified
+    "@typescript-eslint/consistent-type-definitions": [
+      "error",
+      "interface" // Requires using 'interface' instead of 'type' for TypeScript type definitions
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detects the React version
+    },
+    "import/resolver": {
+      "typescript": {} // Configures the import resolver for TypeScript
+    }
+  }
+}
+
