@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { Address, AddressString, AddressBalance, AllBalances } from '../interfaces/interfaces';
+import { Address, AddressString, AllBalances } from '../interfaces/interfaces';
 import { uniqueTokenData } from '../utils/utils';
 
 import { AddressItem, Tag } from './AddressItem';

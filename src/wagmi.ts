@@ -10,7 +10,7 @@ const {
 } = configureChains([mainnet, arbitrum, optimism, zkSync
 ], [alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || '' }),
   jsonRpcProvider({
-    rpc: (chain) => ({
+    rpc: () => ({
       http: zkSyncRpcUrl,
     }),
   })],);
