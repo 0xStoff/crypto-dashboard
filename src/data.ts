@@ -103,7 +103,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: ethereum,
     ...etherToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -111,7 +111,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: zkSync,
     ...etherToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -119,7 +119,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: arbitrum,
     ...etherToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -127,7 +127,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: optmisim,
     ...etherToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -135,7 +135,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: arbitrum,
     ...magicToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -143,7 +143,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: arbitrum,
     ...arbitrumToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -151,7 +151,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: arbitrum,
     ...grailToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -159,7 +159,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: optmisim,
     ...opToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -167,7 +167,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: ethereum,
     ...linkToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -175,7 +175,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: ethereum,
     ...oceanToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
@@ -183,7 +183,7 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: ethereum,
     ...rlcToken,
-    price: 5000,
+    price: 0,
     balance: {
       formatted: '0'
     }
