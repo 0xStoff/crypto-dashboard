@@ -2,10 +2,10 @@ import Image from 'next/image';
 import React from 'react';
 
 import { chains } from '../data';
-import { ChainInterface, TokenBalanceDataInterface } from '../interfaces/interfaces';
+import { Chain, TokenData } from '../interfaces/interfaces';
 
 interface TokenProps {
-    tokenBalanceData: TokenBalanceDataInterface;
+    tokenBalanceData: TokenData;
 }
 
 export const Token: React.FC<TokenProps> = ({ tokenBalanceData }) => {
@@ -14,14 +14,14 @@ export const Token: React.FC<TokenProps> = ({ tokenBalanceData }) => {
   }
 
   const {
-    token, chainId, icon, name, symbol, price, balance: { formatted },
+    token, chain:{ chainId }, icon, name, symbol, price, balance: { formatted },
   } = tokenBalanceData;
 
   const currentPrice = price || 0;
   const balanceFormatted = parseFloat(formatted);
   const balanceUsdValue = currentPrice * balanceFormatted;
   const findChainIdIcon = chains
-    .find((chain: ChainInterface) => chainId === chain.chainId)?.icon;
+    .find((chain: Chain) => chainId === chain.chainId)?.icon;
 
   if (balanceUsdValue < 0.1) {
     return null;

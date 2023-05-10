@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 
-import { AddressInterface, AddressTokenData, TokenInterface, Unify } from '../interfaces/interfaces';
+import { Address, TokenData, AllBalances } from '../interfaces/interfaces';
 import { getTokenBalances } from '../utils/fetch';
 import { calculateNetWorth, unifyTokenBalances } from '../utils/utils';
 
 interface AllTokenBalancesResult {
-  allTokenBalances: Array<AddressTokenData>;
-  unifiedTokenBalances: Array<AddressTokenData>;
-  netWorth: number;
+    allTokenBalances: AllBalances;
+    unifiedTokenBalances: AllBalances;
+    netWorth: string;
 }
 
-export const useAllTokenBalances = (addressList: Array<AddressInterface>, tokens: Array<TokenInterface>): AllTokenBalancesResult => {
-  const [allTokenBalances, setAllTokenBalances] = useState<Array<Unify>>([]);
-  const [unifiedTokenBalances, setUnifiedTokenBalances] = useState<Array<AddressTokenData>>([]);
+export const useAllTokenBalances = (addressList: Array<Address>, tokens: Array<TokenData>): AllTokenBalancesResult => {
+  const [allTokenBalances, setAllTokenBalances] = useState<AllBalances>([]);
+  const [unifiedTokenBalances, setUnifiedTokenBalances] = useState<AllBalances>([]);
   const [netWorth, setNetWorth] = useState<string>('0');
 
   useEffect(() => {

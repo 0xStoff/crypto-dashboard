@@ -7,14 +7,14 @@ import {
   renderNetWorth,
   renderPriceList
 } from '../components/Home';
-import { BUNDLE, tokenDataMock } from '../data';
+import { BUNDLE, tokensMock } from '../data';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useAllTokenBalances } from '../hooks/useTokenBalances';
-import { AddressInterface, AddressString, TokenInterface } from '../interfaces/interfaces';
+import { Address, AddressString, TokenData } from '../interfaces/interfaces';
 
 function Page(): React.JSX.Element {
-  const [tokens] = useState<Array<TokenInterface>>([...tokenDataMock]);
-  const [addressList, setAddressList] = useLocalStorage<Array<AddressInterface>>('address-list', BUNDLE);
+  const [tokens] = useState<Array<TokenData>>([...tokensMock]);
+  const [addressList, setAddressList] = useLocalStorage<Array<Address>>('address-list', BUNDLE);
   const [formVisible, setFormVisible] = useState<boolean>(false);
   const [listVisible, setListVisible] = useState<boolean>(false);
   const [address, setAddress] = useState<AddressString>('0x0');

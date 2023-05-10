@@ -16,7 +16,7 @@ function App({ Component, pageProps }: AppProps) {
       <NextHead>
         <title>dashboard</title>
       </NextHead>
-      {mounted && <Component {...pageProps} />}
+      {mounted && React.createElement(Component, pageProps)}
     </WagmiConfig>
   );
 }

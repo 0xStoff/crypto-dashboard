@@ -1,22 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import useOutsideClick from '../hooks/useOutsideClick';
-import { AddressInterface, AddressString } from '../interfaces/interfaces';
+import { Address, AddressString } from '../interfaces/interfaces';
 
 import { ActionMenu } from './ActionMenu';
 
 interface TagProps {
     address: AddressString;
-    addressList: Array<AddressInterface>;
-    setAddressList: (addressList: Array<AddressInterface>) => void;
+    addressList: Array<Address>;
+    setAddressList: (addressList: Array<Address>) => void;
     tag: string;
 }
 
 interface AddressItemProps {
     address: AddressString;
-    addressList: Array<AddressInterface>;
+    addressList: Array<Address>;
     tag: string;
-    setAddressList: (addressList: Array<AddressInterface>) => void;
+    setAddressList: (addressList: Array<Address>) => void;
 }
 
 export const Tag: React.FC<TagProps> = ({ address, addressList, setAddressList, tag }) => {

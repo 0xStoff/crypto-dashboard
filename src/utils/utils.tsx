@@ -1,44 +1,77 @@
-import { tokenDataMock } from '../data';
-import { TokenInterface, AddressTokenData, TokenBalanceDataInterface, Unify } from '../interfaces/interfaces';
+import { tokensMock } from '../data';
+import { TokenData, AddressBalance, AllBalances } from '../interfaces/interfaces';
 
-export const uniqueTokenData: Array<TokenInterface> =
-  tokenDataMock.reduce((accumulator: Array<TokenInterface>, current: TokenInterface) => {
-    const index = accumulator.findIndex((item) => item.token === current.token);
-    if (index === -1) {
-      accumulator.push(current);
-    }
-    return accumulator;
-  }, []);
+class Utils {
+  static toLocaleString(value: number): string {
+    return value.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+}
 
-export const unifyTokens = (tokens: Array<TokenBalanceDataInterface>): Array<TokenBalanceDataInterface> => {
-  return tokens.reduce((acc: Array<TokenBalanceDataInterface>, token: TokenBalanceDataInterface) => {
-    const existingTokenIndex = acc.findIndex((t) => t.token === token.token);
+const findTokenIndex = (accumulator: Array<TokenData>, token: TokenData): number =>
+  accumulator.findIndex((item) => item.token === token.token);
+
+const customReduceFunction = (
+  tokens: Array<TokenData>,
+  processExistingToken: (existingToken: TokenData, currentToken: TokenData) => void,
+  processNewToken: (currentToken: TokenData) => TokenData,
+): Array<TokenData> => {
+  return tokens.reduce((accumulatedTokens: Array<TokenData>, currentToken: TokenData) => {
+    const existingTokenIndex = findTokenIndex(accumulatedTokens, currentToken);
+
     if (existingTokenIndex !== -1) {
-      acc[existingTokenIndex].balance.formatted = (acc[existingTokenIndex].balance.formatted) + parseFloat(token.balance.formatted);
+      processExistingToken(accumulatedTokens[existingTokenIndex], currentToken);
     } else {
-      acc.push({
-        ...token, balance: {
-          ...token.balance,
-          formatted: token.balance.formatted,
-        },
-      });
+      accumulatedTokens.push(processNewToken(currentToken));
     }
-    return acc;
+
+    return accumulatedTokens;
   }, []);
 };
 
-export const calculateNetWorth = (tokenBalances: Array<AddressTokenData>): string =>
-  tokenBalances.reduce((
-    accumulator: number,
-    currentValue: AddressTokenData) => {
-    return accumulator + currentValue.tokenData.reduce((sum: number, token: TokenBalanceDataInterface) => sum + (parseFloat(token.balance.formatted) * token.price), 0);
-  }, 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const updateExistingToken = (existingToken: TokenData, currentToken: TokenData): void => {
+  const updatedBalance = parseFloat(existingToken.balance.formatted) + parseFloat(currentToken.balance.formatted);
+  existingToken.balance.formatted = updatedBalance.toString();
+};
 
-export const unifyTokenBalances = (tokenBalances: Array<AddressTokenData | Unify>):Array<AddressTokenData> =>
-  tokenBalances.map(({
-    address,
-    tokenData
-  }) => ({
-    address,
-    tokenData: unifyTokens(tokenData)
+const createNewToken = (currentToken: TokenData): TokenData => ({
+  ...currentToken,
+  balance: {
+    ...currentToken.balance,
+    formatted: currentToken.balance.formatted,
+  },
+});
+
+const calculateTokenWorth = (token: TokenData): number => parseFloat(token.balance.formatted) * token.price;
+
+export const uniqueTokenData: Array<TokenData> =
+    customReduceFunction(
+      tokensMock,
+      () => null,
+      (currentToken) => currentToken,
+    );
+
+export const unifyTokens = (tokens: Array<TokenData>): Array<TokenData> =>
+  customReduceFunction(
+    tokens,
+    updateExistingToken,
+    createNewToken
+  );
+
+export const calculateNetWorth = (tokenBalances: AllBalances): string =>
+  Utils.toLocaleString(
+    tokenBalances.reduce((
+      accumulator: number,
+      currentValue: AddressBalance) => {
+      return (accumulator + currentValue.tokens.reduce(
+        (sum: number, token: TokenData) => sum + calculateTokenWorth(token), 0
+      ));
+    }, 0));
+
+export const unifyTokenBalances = (tokenBalances: AllBalances): AllBalances =>
+  tokenBalances.map(({ tokens, ...otherProps }) => ({
+    tokens: unifyTokens(tokens),
+    ...otherProps
   }));

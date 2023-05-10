@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { AddressInterface, AddressString } from '../interfaces/interfaces';
+import { Address, AddressString } from '../interfaces/interfaces';
 
 interface ActionMenuProps {
   address: AddressString;
-  setAddressList: (addressList: Array<AddressInterface>) => void;
-  addressList: Array<AddressInterface>;
+  setAddressList: (addressList: Array<Address>) => void;
+  addressList: Array<Address>;
 }
 
 export const ActionMenu: React.FC<ActionMenuProps> = ({
