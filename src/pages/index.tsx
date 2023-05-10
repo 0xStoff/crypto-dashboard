@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 
-import {
-  renderAddressList,
-  renderButtons,
-  renderCards, renderForm,
-  renderNetWorth,
-  renderPriceList
-} from '../components/Home';
+import { PriceAndAddressList } from '../components/AddressItem';
+import {  Cards, NetWorth } from '../components/Cards';
+import { Buttons, Form } from '../components/Form';
 import { BUNDLE, tokensMock } from '../data';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useAllTokenBalances } from '../hooks/useTokenBalances';
@@ -25,19 +21,34 @@ function Page(): React.JSX.Element {
 
   return (
     <div className="container">
-      {renderButtons({ formVisible, setFormVisible, listVisible, setListVisible })}
-      {renderForm({ formVisible, setAddress, setTag, setAddressList, address, tag, addressList })}
-      <div className={`container-list ${listVisible ? 'visible' : ''}`}>
-        {renderPriceList()}
-        {renderAddressList({ addressList, setAddressList })}
-      </div>
-      {renderNetWorth(netWorth)}
+      <Buttons formVisible={formVisible}
+        setFormVisible={setFormVisible}
+        listVisible={listVisible}
+        setListVisible={setListVisible}
+      />
+      <Form formVisible={formVisible}
+        setAddress={setAddress}
+        setTag={setTag}
+        setAddressList={setAddressList}
+        address={address}
+        tag={tag}
+        addressList={addressList}
+      />
+      <PriceAndAddressList
+        listVisible={listVisible}
+        addressList={addressList}
+        setAddressList={setAddressList}
+      />
+      <NetWorth netWorth={netWorth}/>
       <button onClick={() => setUnify(!unify)}
         className="unify-button">
         {unify ? '⧜' : '⧝'}
       </button>
-      {unify && renderCards({ balances: allTokenBalances,addressList, setAddressList })}
-      {!unify && renderCards({ balances: unifiedTokenBalances, addressList, setAddressList })}
+      <Cards
+        balances={unify ? allTokenBalances : unifiedTokenBalances}
+        addressList={addressList}
+        setAddressList={setAddressList}
+      />
     </div>);
 }
 

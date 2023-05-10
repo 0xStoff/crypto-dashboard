@@ -1,9 +1,16 @@
+import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
 import useOutsideClick from '../hooks/useOutsideClick';
 import { Address, AddressString } from '../interfaces/interfaces';
+import { uniqueTokenData } from '../utils/utils';
 
 import { ActionMenu } from './ActionMenu';
+
+interface AddressListProps {
+    addressList: Array<Address>;
+    setAddressList: (value: Array<Address>) => void;
+}
 
 interface TagProps {
     address: AddressString;
@@ -17,6 +24,10 @@ interface AddressItemProps {
     addressList: Array<Address>;
     tag: string;
     setAddressList: (addressList: Array<Address>) => void;
+}
+
+interface PriceAndAddressListProps extends AddressListProps {
+    listVisible: boolean;
 }
 
 export const Tag: React.FC<TagProps> = ({ address, addressList, setAddressList, tag }) => {
@@ -118,3 +129,44 @@ export const AddressItem: React.FC<AddressItemProps> = ({
     </div>
   );
 };
+const AddressList = ({
+  addressList,
+  setAddressList
+}: AddressListProps) => (
+  <div className="list">
+    {addressList.map(({ address, tag }) => (
+      <AddressItem
+        key={address}
+        address={address}
+        tag={tag}
+        setAddressList={setAddressList}
+        addressList={addressList}
+      />
+    ))}
+  </div>
+);
+const PriceList: React.FC = () => (
+  <div className="list">
+    {uniqueTokenData.map((balance) => (
+      <div key={balance.token}
+        className="flex">
+        <div className="flex">
+          <Image alt="token icon"
+            className="token-list"
+            src={balance.icon || ''}/>
+          <h2>{balance.name}</h2>
+        </div>
+        <p className="price">$ {balance.price}</p>
+      </div>
+    ))}
+  </div>
+);
+export const PriceAndAddressList: React.FC<PriceAndAddressListProps> = ({ listVisible, addressList, setAddressList }) => (
+  <div className={`container-list ${listVisible ? 'visible' : ''}`}>
+    <PriceList/>
+    <AddressList
+      addressList={addressList}
+      setAddressList={setAddressList}
+    />
+  </div>
+);
