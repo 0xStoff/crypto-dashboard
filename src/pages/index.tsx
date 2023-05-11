@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { PriceAndAddressList } from '../components/AddressItem';
 import { Cards, NetWorth } from '../components/Cards';
@@ -6,11 +6,12 @@ import { Buttons, Form } from '../components/Form';
 import { BUNDLE, tokensMock } from '../data';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useAllTokenBalances } from '../hooks/useTokenBalances';
-import { Address, AddressString, AllBalances, TokenData } from '../interfaces/interfaces';
+import { Address, AddressString } from '../interfaces/interfaces';
 import { calculateNetWorth, unifyTokenBalances } from '../utils/utils';
 
 function Page(): React.JSX.Element {
-  const [tokens] = useState<Array<TokenData>>([...tokensMock.map((token) => ({ ...token, price: 100 }))]);
+  // const [tokens, setTokens] = useState<Array<Omit<TokenData, 'price' | 'balance'>>>([...tokensMock]);
+
   const [addressList, setAddressList] = useLocalStorage<Array<Address>>('address-list', BUNDLE);
   const [formVisible, setFormVisible] = useState<boolean>(false);
   const [listVisible, setListVisible] = useState<boolean>(false);
@@ -18,17 +19,20 @@ function Page(): React.JSX.Element {
   const [tag, setTag] = useState<string>('');
   const [unify, setUnify] = useState<boolean>(true);
 
-  const { allTokenBalances, loading, refetchBalances } = useAllTokenBalances(addressList, tokens);
-  const [balances, setBalances] = useState<AllBalances>([]);
-  const [unifiedTokenBalances, setUnifiedTokenBalances] = useState<AllBalances>([]);
-  const [netWorth, setNetWorth] = useState<string>('0');
+  const { allTokenBalances, loading, refetchBalances } = useAllTokenBalances(addressList, tokensMock);
 
-  useEffect(() => {
-    // setTokens([...tokensMock.map((token) => ({ ...token, price: 400 }))]);
-    setBalances(allTokenBalances);
-    setUnifiedTokenBalances(unifyTokenBalances(balances));
-    setNetWorth(calculateNetWorth(balances));
-  }, [allTokenBalances, balances]);
+  // const [balances, setBalances] = useState<AllBalances>([]);
+  // const [unifiedTokenBalances, setUnifiedTokenBalances] = useState<AllBalances>([]);
+  // const [netWorth, setNetWorth] = useState<string>('0');
+  //
+  // useEffect(() => {
+  //   setBalances(allTokenBalances);
+  //   setUnifiedTokenBalances(unifyTokenBalances(balances));
+  //   setNetWorth(calculateNetWorth(balances));
+  // }, [allTokenBalances, balances]);
+
+  const unifiedTokenBalances = unifyTokenBalances(allTokenBalances);
+  const netWorth = calculateNetWorth(allTokenBalances);
 
   return (
     <div className="container">
@@ -53,8 +57,9 @@ function Page(): React.JSX.Element {
         listVisible={listVisible}
         addressList={addressList}
         setAddressList={setAddressList}
-        tokens={tokens}
+        tokens={[...tokensMock]}
       />
+
       <NetWorth netWorth={netWorth}/>
       <div className='flex-container'>
         <button onClick={() => refetchBalances()}
@@ -67,7 +72,7 @@ function Page(): React.JSX.Element {
         </button>
       </div>
       <Cards
-        balances={unify ? balances : unifiedTokenBalances}
+        balances={unify ? allTokenBalances : unifiedTokenBalances}
         addressList={addressList}
         setAddressList={setAddressList}
       />

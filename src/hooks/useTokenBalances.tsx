@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
 
-import { Address, AllBalances, TokenData, } from '../interfaces/interfaces';
+import { Address, AllBalances, TokenData } from '../interfaces/interfaces';
 import { fetchTokenBalancesForAddresses } from '../utils/fetch';
 
 interface State {

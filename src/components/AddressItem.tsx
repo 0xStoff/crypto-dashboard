@@ -28,7 +28,7 @@ interface AddressItemProps {
 
 interface PriceAndAddressListProps extends AddressListProps {
     listVisible: boolean;
-    tokens: Array<TokenData>;
+    tokens: Array<TokenData >;
 }
 
 export const Tag: React.FC<TagProps> = ({ address, addressList, setAddressList, tag }) => {
@@ -146,7 +146,7 @@ const AddressList = ({
     ))}
   </div>
 );
-const PriceList: React.FC<{ tokens: Array<TokenData> }> = ({ tokens }) => (
+const PriceList: React.FC<{ tokens: Array<TokenData > }> = ({ tokens }) => (
   <div className="list">
     {uniqueTokenData(tokens).map((balance) => (
       <div key={balance.token}

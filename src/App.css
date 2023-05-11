@@ -138,6 +138,7 @@
     height: fit-content;
     opacity: 1;
     visibility: visible;
+    margin-top: 30px;
 }
 
 .context-button {
@@ -243,7 +244,7 @@ h2 {
     padding: 25px;
     height: fit-content;
     box-shadow: 10px 5px var(--shadow-color);
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 

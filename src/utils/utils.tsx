@@ -17,9 +17,9 @@ const findTokenIndex = (accumulator: Array<TokenData>, token: TokenData): number
   accumulator.findIndex((item) => item.token === token.token);
 
 const customReduceFunction = (
-  tokens: Array<TokenData>,
-  processExistingToken: (existingToken: TokenData, currentToken: TokenData) => void,
-  processNewToken: (currentToken: TokenData) => TokenData,
+  tokens: Array<TokenData | Required<TokenData>>,
+  processExistingToken: (existingToken: TokenData | Required<TokenData>, currentToken: TokenData | Required<TokenData>) => void,
+  processNewToken: (currentToken: TokenData | Required<TokenData>) => TokenData | Required<TokenData>,
 ): Array<TokenData> => {
   return tokens.reduce((accumulatedTokens: Array<TokenData>, currentToken: TokenData) => {
     const existingTokenIndex = findTokenIndex(accumulatedTokens, currentToken);
@@ -35,19 +35,19 @@ const customReduceFunction = (
 };
 
 const updateExistingToken = (existingToken: TokenData, currentToken: TokenData): void => {
-  const updatedBalance = parseFloat(existingToken.balance.formatted) + parseFloat(currentToken.balance.formatted);
-  existingToken.balance.formatted = updatedBalance.toString();
+  const updatedBalance = parseFloat(existingToken.balance?.formatted || '0') + parseFloat(currentToken.balance?.formatted || '0');
+  existingToken.balance = { formatted: updatedBalance.toString() };
 };
 
 const createNewToken = (currentToken: TokenData): TokenData => ({
   ...currentToken,
   balance: {
     ...currentToken.balance,
-    formatted: currentToken.balance.formatted,
+    formatted: currentToken.balance?.formatted || '0',
   },
 });
 
-const calculateTokenWorth = (token: TokenData): number => parseFloat(token.balance.formatted) * token.price;
+const calculateTokenWorth = (token: TokenData): number => parseFloat(token.balance?.formatted || '0') * (token.price || 0);
 
 export const uniqueTokenData = (tokens: Array<TokenData>): Array<TokenData> => customReduceFunction(
   tokens,

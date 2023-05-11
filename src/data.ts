@@ -111,90 +111,46 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: ethereum,
     ...etherToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: zkSync,
     ...etherToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: arbitrum,
     ...etherToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: optmisim,
     ...etherToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: arbitrum,
     ...magicToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: arbitrum,
     ...arbitrumToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: arbitrum,
     ...grailToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: optmisim,
     ...opToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: ethereum,
     ...linkToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: ethereum,
     ...oceanToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   },
   {
     chain: ethereum,
     ...rlcToken,
-    price: 0,
-    balance: {
-      formatted: '0'
-    }
   }];
 
 export const BUNDLE: Array<Address> = [{

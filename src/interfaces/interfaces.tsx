@@ -5,8 +5,8 @@ import { StaticImageData } from 'next/image';
 export type AddressString = `0x${string}`
 
 export interface Address {
-  address: AddressString;
-  tag: string;
+    address: AddressString;
+    tag: string;
 }
 
 // Chain
@@ -33,7 +33,7 @@ export interface Data {
 }
 
 // Token + Chain + fetched Data
-export interface TokenData extends Data, TokenBase {
+export interface TokenData extends Partial<Data>, TokenBase {
     chain: Chain;
 }
 
@@ -41,8 +41,8 @@ export interface TokenData extends Data, TokenBase {
 export type AddressBalance = Address & TokenData
 
 // Token Data Array + address
-export interface AddressBalances extends Address{
-    tokens: Array<TokenData>;
+export interface AddressBalances extends Address {
+    tokens: Array<TokenData | Required<TokenData>>;
 }
 
 export type AllBalances = Array<AddressBalances>

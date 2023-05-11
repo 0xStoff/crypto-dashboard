@@ -31,6 +31,7 @@ const fetchTokenBalanceForAddress = async (
   return {
     ...token,
     balance: { formatted: tokenBalance.formatted },
+    price: 100
   };
 };
 
