@@ -1,12 +1,15 @@
-import { tokensMock } from '../data';
-import { TokenData, AddressBalance, AllBalances } from '../interfaces/interfaces';
+import { TokenData, AddressBalances, AllBalances, AddressString } from '../interfaces/interfaces';
 
-class Utils {
+export class Utils {
   static toLocaleString(value: number): string {
     return value.toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
+  }
+
+  static isEthereum(token: TokenData): AddressString | undefined {
+    return token.token === '0x0' ? undefined : token.token;
   }
 }
 
@@ -46,12 +49,11 @@ const createNewToken = (currentToken: TokenData): TokenData => ({
 
 const calculateTokenWorth = (token: TokenData): number => parseFloat(token.balance.formatted) * token.price;
 
-export const uniqueTokenData: Array<TokenData> =
-    customReduceFunction(
-      tokensMock,
-      () => null,
-      (currentToken) => currentToken,
-    );
+export const uniqueTokenData = (tokens: Array<TokenData>): Array<TokenData> => customReduceFunction(
+  tokens,
+  () => null,
+  (currentToken) => currentToken,
+);
 
 export const unifyTokens = (tokens: Array<TokenData>): Array<TokenData> =>
   customReduceFunction(
@@ -64,7 +66,7 @@ export const calculateNetWorth = (tokenBalances: AllBalances): string =>
   Utils.toLocaleString(
     tokenBalances.reduce((
       accumulator: number,
-      currentValue: AddressBalance) => {
+      currentValue: AddressBalances) => {
       return (accumulator + currentValue.tokens.reduce(
         (sum: number, token: TokenData) => sum + calculateTokenWorth(token), 0
       ));

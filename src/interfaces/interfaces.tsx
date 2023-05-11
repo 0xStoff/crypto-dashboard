@@ -37,12 +37,15 @@ export interface TokenData extends Data, TokenBase {
     chain: Chain;
 }
 
+// Token Data + address
+export type AddressBalance = Address & TokenData
+
 // Token Data Array + address
-export interface AddressBalance extends Address{
+export interface AddressBalances extends Address{
     tokens: Array<TokenData>;
 }
 
-export type AllBalances = Array<AddressBalance>
+export type AllBalances = Array<AddressBalances>
 
 //
 // // Example with Record type

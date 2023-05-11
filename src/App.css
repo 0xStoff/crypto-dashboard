@@ -290,23 +290,30 @@ h2 {
     color: var(--background-color);
 }
 
-.unify-button {
-    font-size: 1.5em;
+.action-button {
+    font-size: 2em;
     border: none;
     border-radius: 5px;
-    margin-bottom: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
-
-
     background-color: var(--badge-color);
     width: 40px;
     height: 40px;
     color: var(--primary-color);
+    margin-right: 5px;
 }
 
-.unify-button:hover {
+.action-button:hover {
     background-color: var(--hover-color);
+}
+
+.refetch-button {
+    font-size: 1.4em;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
 }
 
 

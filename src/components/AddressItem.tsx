@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
 import useOutsideClick from '../hooks/useOutsideClick';
-import { Address, AddressString } from '../interfaces/interfaces';
+import { Address, AddressString, TokenData } from '../interfaces/interfaces';
 import { uniqueTokenData } from '../utils/utils';
 
 import { ActionMenu } from './ActionMenu';
@@ -28,6 +28,7 @@ interface AddressItemProps {
 
 interface PriceAndAddressListProps extends AddressListProps {
     listVisible: boolean;
+    tokens: Array<TokenData>;
 }
 
 export const Tag: React.FC<TagProps> = ({ address, addressList, setAddressList, tag }) => {
@@ -145,9 +146,9 @@ const AddressList = ({
     ))}
   </div>
 );
-const PriceList: React.FC = () => (
+const PriceList: React.FC<{ tokens: Array<TokenData> }> = ({ tokens }) => (
   <div className="list">
-    {uniqueTokenData.map((balance) => (
+    {uniqueTokenData(tokens).map((balance) => (
       <div key={balance.token}
         className="flex">
         <div className="flex">
@@ -161,9 +162,10 @@ const PriceList: React.FC = () => (
     ))}
   </div>
 );
-export const PriceAndAddressList: React.FC<PriceAndAddressListProps> = ({ listVisible, addressList, setAddressList }) => (
+
+export const PriceAndAddressList: React.FC<PriceAndAddressListProps> = ({ listVisible, addressList, setAddressList, tokens }) => (
   <div className={`container-list ${listVisible ? 'visible' : ''}`}>
-    <PriceList/>
+    <PriceList tokens={tokens} />
     <AddressList
       addressList={addressList}
       setAddressList={setAddressList}

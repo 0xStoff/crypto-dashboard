@@ -62,7 +62,7 @@ export const Buttons = ({
   listVisible,
   setListVisible,
 }: ButtonsProps) => (
-  <div style={{ display: 'flex', alignItems: 'center' }}>
+  <div className='flex-container'>
     <button
       onClick={() => setFormVisible(!formVisible)}
       className="toggle-form-button"

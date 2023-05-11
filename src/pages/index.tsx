@@ -6,10 +6,11 @@ import { Buttons, Form } from '../components/Form';
 import { BUNDLE, tokensMock } from '../data';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useAllTokenBalances } from '../hooks/useTokenBalances';
-import { Address, AddressString, TokenData } from '../interfaces/interfaces';
+import { Address, AddressString, AllBalances, TokenData } from '../interfaces/interfaces';
+import { calculateNetWorth, unifyTokenBalances } from '../utils/utils';
 
 function Page(): React.JSX.Element {
-  const [tokens] = useState<Array<TokenData>>([...tokensMock]);
+  const [tokens] = useState<Array<TokenData>>([...tokensMock.map((token) => ({ ...token, price: 100 }))]);
   const [addressList, setAddressList] = useLocalStorage<Array<Address>>('address-list', BUNDLE);
   const [formVisible, setFormVisible] = useState<boolean>(false);
   const [listVisible, setListVisible] = useState<boolean>(false);
@@ -17,16 +18,28 @@ function Page(): React.JSX.Element {
   const [tag, setTag] = useState<string>('');
   const [unify, setUnify] = useState<boolean>(true);
 
-  const { allTokenBalances, unifiedTokenBalances, netWorth } = useAllTokenBalances(addressList, tokens);
+  const { allTokenBalances, loading, refetchBalances } = useAllTokenBalances(addressList, tokens);
+  const [balances, setBalances] = useState<AllBalances>([]);
+  const [unifiedTokenBalances, setUnifiedTokenBalances] = useState<AllBalances>([]);
+  const [netWorth, setNetWorth] = useState<string>('0');
+
+  useEffect(() => {
+    // setTokens([...tokensMock.map((token) => ({ ...token, price: 400 }))]);
+    setBalances(allTokenBalances);
+    setUnifiedTokenBalances(unifyTokenBalances(balances));
+    setNetWorth(calculateNetWorth(balances));
+  }, [allTokenBalances, balances]);
 
   return (
     <div className="container">
-      <Buttons formVisible={formVisible}
+      <Buttons
+        formVisible={formVisible}
         setFormVisible={setFormVisible}
         listVisible={listVisible}
         setListVisible={setListVisible}
       />
-      <Form formVisible={formVisible}
+      <Form
+        formVisible={formVisible}
         setAddress={setAddress}
         setTag={setTag}
         setAddressList={setAddressList}
@@ -34,18 +47,27 @@ function Page(): React.JSX.Element {
         tag={tag}
         addressList={addressList}
       />
+      {loading && <h1>Loading...</h1>}
+
       <PriceAndAddressList
         listVisible={listVisible}
         addressList={addressList}
         setAddressList={setAddressList}
+        tokens={tokens}
       />
       <NetWorth netWorth={netWorth}/>
-      <button onClick={() => setUnify(!unify)}
-        className="unify-button">
-        {unify ? '⧜' : '⧝'}
-      </button>
+      <div className='flex-container'>
+        <button onClick={() => refetchBalances()}
+          className="action-button refetch-button">
+                    ↺
+        </button>
+        <button onClick={() => setUnify(!unify)}
+          className="action-button">
+          {unify ? '⧜' : '⧝'}
+        </button>
+      </div>
       <Cards
-        balances={unify ? allTokenBalances : unifiedTokenBalances}
+        balances={unify ? balances : unifiedTokenBalances}
         addressList={addressList}
         setAddressList={setAddressList}
       />
@@ -53,3 +75,12 @@ function Page(): React.JSX.Element {
 }
 
 export default Page;
+
+// const getPrice = async (token) => {
+//   if (token.pools.length >0) {
+//     const price = await fetchPrice(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`, token.pools[0]);
+//     setPrice(price);
+//   } else {
+//     setPrice(1000);
+//   }
+// };
