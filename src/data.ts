@@ -41,6 +41,7 @@ const etherToken: TokenBase = {
   token: '0x0',
   icon: eth,
   decimals: 18,
+  pools:['0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419']
 };
 
 const magicToken: TokenBase = {
@@ -49,6 +50,7 @@ const magicToken: TokenBase = {
   name: 'Magic',
   symbol: 'MAGIC',
   token: '0x539bde0d7dbd336b79148aa742883198bbf60342',
+  pools:[]
 };
 
 const arbitrumToken: TokenBase = {
@@ -57,6 +59,7 @@ const arbitrumToken: TokenBase = {
   name: 'Arbitrum',
   symbol: 'ARB',
   token: '0x912ce59144191c1204e64559fe8253a0e49e6548',
+  pools:[]
 };
 
 const grailToken: TokenBase = {
@@ -65,6 +68,7 @@ const grailToken: TokenBase = {
   name: 'Grail',
   symbol: 'GRAIL',
   token: '0x3d9907F9a368ad0a51Be60f7Da3b97cf940982D8',
+  pools:[]
 };
 
 const opToken: TokenBase = {
@@ -72,7 +76,8 @@ const opToken: TokenBase = {
   icon: op,
   name: 'Optimism',
   symbol: 'OP',
-  token: '0x4200000000000000000000000000000000000042'
+  token: '0x4200000000000000000000000000000000000042',
+  pools:[]
 };
 
 const linkToken: TokenBase = {
@@ -80,7 +85,8 @@ const linkToken: TokenBase = {
   icon: link,
   name: 'Chainlink',
   symbol: 'LINK',
-  token: '0x514910771AF9Ca656af840dff83E8264EcF986CA'
+  token: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
+  pools:[]
 };
 
 const oceanToken: TokenBase = {
@@ -88,7 +94,8 @@ const oceanToken: TokenBase = {
   icon: ocean,
   name: 'Ocean Protocol',
   symbol: 'OCEAN',
-  token: '0x967da4048cD07aB37855c090aAF366e4ce1b9F48'
+  token: '0x967da4048cD07aB37855c090aAF366e4ce1b9F48',
+  pools:[]
 };
 
 const rlcToken: TokenBase = {
@@ -96,7 +103,8 @@ const rlcToken: TokenBase = {
   icon: rlc,
   name: 'iExec',
   symbol: 'RLC',
-  token: '0x607F4C5BB672230e8672085532f7e901544a7375'
+  token: '0x607F4C5BB672230e8672085532f7e901544a7375',
+  pools:[]
 };
 
 export const tokensMock: Array<TokenData> = [

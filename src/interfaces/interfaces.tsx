@@ -23,6 +23,7 @@ export interface TokenBase {
     token: AddressString;
     decimals: number;
     icon: StaticImageData;
+    pools: Array<AddressString>;
 }
 
 // fetched Data
