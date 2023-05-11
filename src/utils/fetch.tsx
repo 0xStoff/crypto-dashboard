@@ -28,10 +28,19 @@ const fetchTokenBalanceForAddress = async (
     chainId: token.chain.chainId,
   });
 
+  let price = 0;
+  if (token.pools.length > 0) {
+    price = await fetchPrice(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`, token.pools[0].pool);
+    if (token.pools[0].base === 'eth') {
+      const ethPrice = await fetchPrice(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`,'0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419');
+      price = price * ethPrice;
+    }
+  }
+
   return {
     ...token,
     balance: { formatted: tokenBalance.formatted },
-    price: 100
+    price
   };
 };
 

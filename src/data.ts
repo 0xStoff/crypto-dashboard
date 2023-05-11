@@ -41,7 +41,7 @@ const etherToken: TokenBase = {
   token: '0x0',
   icon: eth,
   decimals: 18,
-  pools:['0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419']
+  pools:[{ base: 'usd',pool: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419' }]
 };
 
 const magicToken: TokenBase = {
@@ -107,6 +107,15 @@ const rlcToken: TokenBase = {
   pools:[]
 };
 
+const gohmToken: TokenBase = {
+  decimals: 18,
+  icon: rlc,
+  name: 'Olympus Dao',
+  symbol: 'gOhm',
+  token: '0x0ab87046fBb341D058F17CBC4c1133F25a20a52f',
+  pools:[{ base: 'eth',pool: '0x9a72298ae3886221820B1c878d12D872087D3a23' }]
+};
+
 export const tokensMock: Array<TokenData> = [
   {
     chain: ethereum,
@@ -151,6 +160,9 @@ export const tokensMock: Array<TokenData> = [
   {
     chain: ethereum,
     ...rlcToken,
+  }, {
+    chain: ethereum,
+    ...gohmToken
   }];
 
 export const BUNDLE: Array<Address> = [{

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { chains } from '../data';
 import { Chain, TokenData } from '../interfaces/interfaces';
+import { Utils } from '../utils/utils';
 
 interface TokenProps {
     tokenBalanceData: TokenData;
@@ -23,7 +24,7 @@ export const Token: React.FC<TokenProps> = ({ tokenBalanceData }) => {
   const findChainIdIcon = chains
     .find((chain: Chain) => chainId === chain.chainId)?.icon;
 
-  if (balanceUsdValue < 0.1) {
+  if (balanceFormatted < 0.1 && balanceUsdValue < 0.1) {
     return null;
   }
 
@@ -45,7 +46,7 @@ export const Token: React.FC<TokenProps> = ({ tokenBalanceData }) => {
         <p>
           {balanceFormatted.toFixed(5)} {symbol}
         </p>
-        <p>${balanceUsdValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <p>${Utils.toLocaleString(balanceUsdValue)}</p>
       </div>
     </div>
   </div>;
